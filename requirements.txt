@@ -1,0 +1,7 @@
+torch>=2.0.0
+torchvision
+numpy
+scipy
+nibabel         # Crucial for handling .nii / .nii.gz medical images
+tqdm
+pyyaml
