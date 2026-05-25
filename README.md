@@ -16,7 +16,7 @@ This project reframes deformable image registration as a physics-informed learni
 * **Diffeomorphic Integration:** Predicts a stationary velocity field (SVF) integrated via scaling-and-squaring, guaranteeing topology-preserving deformations (no unbiological tissue folding).
 * **Physics-Informed Neural Network (PINN):** Supervised by a composite loss function integrating Normalised Mutual Information (NMI), Bending Energy, and Navier-Cauchy biomechanical constraints.
 
-* ## 💾 Dataset Requirements: The RESECT Database
+## 💾 Dataset Requirements: The RESECT Database
 
 Due to patient privacy and data usage agreements, the training data cannot be hosted in this repository. To train or evaluate BrainShiftNet, you **must download the RESECT database manually**.
 
