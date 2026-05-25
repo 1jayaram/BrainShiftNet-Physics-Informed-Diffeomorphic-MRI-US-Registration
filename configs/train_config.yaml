@@ -1,0 +1,44 @@
+# configs/train_config.yaml
+# Brain Shift Prediction — Training Configuration
+# Run with: python training/train.py --config configs/train_config.yaml
+
+# ── Data ──────────────────────────────────────────────────────────────────
+data_dir:     "data/processed2"
+segmentation_dir: "RESECT_segmentation"  # Path to RESECT segmentation masks
+landmark_dir: "EASY-RESECT (1)/EASY-RESECT/landmarks/Coordinates"  # MNI .tag landmarks
+split_file:   null             # null = auto-split; set path for LOOCV splits
+target_shape: [128, 128, 128]  # D x H x W — reduced for GPU memory
+us_stage:     "before"         # "before" | "during" — which US to register to
+use_t1:       true
+use_flair:    true
+augment:      true
+
+# ── Model ─────────────────────────────────────────────────────────────────
+model_type:    "diffeomorphic"   # "standard" | "diffeomorphic"
+base_features: 8                 # Reduced from 16 for GPU memory
+use_attention: false             # Disabled for memory
+int_steps:     5                 # Reduced from 7
+
+# ── Training ──────────────────────────────────────────────────────────────
+batch_size:      1              # 3D volumes are large — 1-2 per batch typical
+epochs:          100
+lr:              0.0001
+lr_decay:        0.97
+weight_decay:    0.00001
+grad_clip:       1.0
+mixed_precision: false          # CPU training — disable mixed precision
+
+# ── Loss ──────────────────────────────────────────────────────────────────
+lambda_sim:   1.0    # Similarity loss weight
+lambda_reg:   2.0    # Regularisation (smooth deformation)
+lambda_lm:    5.0    # Landmark supervision (if landmarks available)
+lambda_jac:   0.5    # Jacobian penalty (prevent folding)
+similarity:   "mse"   # "mi" (multi-modal) | "ncc" (mono-modal) | "mse"
+regulariser:  "bending"  # "bending" | "gradient"
+
+# ── Output ────────────────────────────────────────────────────────────────
+output_dir:  "outputs/run_01"
+log_dir:     "logs/run_01"
+save_every:  10     # Save checkpoint every N epochs
+patience:    30     # Early stopping patience
+seed:        42
