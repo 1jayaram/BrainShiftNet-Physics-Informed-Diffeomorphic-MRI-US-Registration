@@ -16,6 +16,19 @@ This project reframes deformable image registration as a physics-informed learni
 * **Diffeomorphic Integration:** Predicts a stationary velocity field (SVF) integrated via scaling-and-squaring, guaranteeing topology-preserving deformations (no unbiological tissue folding).
 * **Physics-Informed Neural Network (PINN):** Supervised by a composite loss function integrating Normalised Mutual Information (NMI), Bending Energy, and Navier-Cauchy biomechanical constraints.
 
+* ## 💾 Dataset Requirements: The RESECT Database
+
+Due to patient privacy and data usage agreements, the training data cannot be hosted in this repository. To train or evaluate BrainShiftNet, you **must download the RESECT database manually**.
+
+**How to get the data:**
+1. Create a free account on the Neuroimaging Informatics Tools and Resources Clearinghouse (NITRC).
+2. Navigate to the **[RESECT Project Page](https://www.nitrc.org/projects/resect/)**.
+3. Accept the data usage agreement and download the dataset (22 clinical cases containing pre-operative MRI, intra-operative US, and landmark `.tag` files).
+4. Extract the dataset into the `data/raw/` directory of this repository.
+5. Run the provided pre-processing script to normalize the ultrasound data:
+   ```bash
+   python training/fix1_diagnose_us.py --mri data/raw/mri.nii.gz --us data/raw/us.nii.gz --out data/processed/
+
 ## ⚙️ Installation & Usage
 
 ### Prerequisites
